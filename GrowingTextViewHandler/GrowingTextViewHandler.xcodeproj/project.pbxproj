@@ -13,6 +13,7 @@
 		69CEFFD21A9D9F03003B4786 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69CEFFD11A9D9F03003B4786 /* Images.xcassets */; };
 		69CEFFD51A9D9F03003B4786 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69CEFFD31A9D9F03003B4786 /* LaunchScreen.xib */; };
 		69CEFFE11A9D9F03003B4786 /* GrowingTextViewHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEFFE01A9D9F03003B4786 /* GrowingTextViewHandlerTests.swift */; };
+		69CEFFEC1A9D9FB1003B4786 /* GrowingTextViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEFFEB1A9D9FB1003B4786 /* GrowingTextViewHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		69CEFFDA1A9D9F03003B4786 /* GrowingTextViewHandlerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowingTextViewHandlerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69CEFFDF1A9D9F03003B4786 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69CEFFE01A9D9F03003B4786 /* GrowingTextViewHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextViewHandlerTests.swift; sourceTree = "<group>"; };
+		69CEFFEB1A9D9FB1003B4786 /* GrowingTextViewHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GrowingTextViewHandler.swift; path = Source/GrowingTextViewHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		69CEFFC71A9D9F03003B4786 /* GrowingTextViewHandler */ = {
 			isa = PBXGroup;
 			children = (
+				69CEFFEA1A9D9F7C003B4786 /* Source */,
 				69CEFFCA1A9D9F03003B4786 /* AppDelegate.swift */,
 				69CEFFCC1A9D9F03003B4786 /* ViewController.swift */,
 				69CEFFCE1A9D9F03003B4786 /* Main.storyboard */,
@@ -110,6 +113,14 @@
 				69CEFFDF1A9D9F03003B4786 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		69CEFFEA1A9D9F7C003B4786 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				69CEFFEB1A9D9FB1003B4786 /* GrowingTextViewHandler.swift */,
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69CEFFEC1A9D9FB1003B4786 /* GrowingTextViewHandler.swift in Sources */,
 				69CEFFCD1A9D9F03003B4786 /* ViewController.swift in Sources */,
 				69CEFFCB1A9D9F03003B4786 /* AppDelegate.swift in Sources */,
 			);

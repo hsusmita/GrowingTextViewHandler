@@ -8,18 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITextViewDelegate {
 
+  @IBOutlet weak var textView: UITextView!
+  var handler:GrowingTextViewHandler?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    handler = GrowingTextViewHandler(textView: self.textView, superView: self.view, growthDirection: TextGrowthDirection.Both)
   }
 
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+  }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
 
-
+  func textViewDidChange(textView: UITextView) {
+    self.handler?.resize()
+  }
 }
 
