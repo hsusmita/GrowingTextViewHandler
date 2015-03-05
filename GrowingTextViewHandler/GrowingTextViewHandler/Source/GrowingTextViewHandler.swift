@@ -35,10 +35,9 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
 
   private func estimatedInitialHeight() -> (CGFloat) {
     var font = growingTextView.font
-    var adjust = (font.ascender - font.capHeight)
     var estimatedHeight = font.lineHeight * CGFloat(self.minimumNumberOfLines)
-    var height = self.growingTextView.caretRectForPosition(self.growingTextView.selectedTextRange?.end).height
-    var totalHeight = height * CGFloat(self.minimumNumberOfLines) + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
+    var caretHeight = self.growingTextView.caretRectForPosition(self.growingTextView.selectedTextRange?.end).height
+    var totalHeight = caretHeight * CGFloat(self.minimumNumberOfLines) + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
     return max(totalHeight,self.growingTextView.frame.size.height)
   }
   
@@ -52,7 +51,10 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
   }
   
   private func currentNumberOfLines() -> (NSInteger) {
-    return Int( self.growingTextView.contentSize.height / self.growingTextView.font.lineHeight)
+    var caretHeight = self.growingTextView.caretRectForPosition(self.growingTextView.selectedTextRange?.end).height
+    var totalHeight = self.growingTextView.contentSize.height + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
+    var numberOfLines = Int(totalHeight/caretHeight) - 1;
+    return numberOfLines;
   }
   
   private func updateVerticalAlignment(height:CGFloat, animated:Bool) {
