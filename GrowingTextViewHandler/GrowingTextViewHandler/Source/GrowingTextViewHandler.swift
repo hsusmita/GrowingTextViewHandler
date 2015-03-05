@@ -12,7 +12,7 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
   
   public var growingTextView : UITextView!
   public var animationDuration = 0.8
-  public var maximumNumberOfLines = 10
+  public var maximumNumberOfLines = 3
   public var minimumNumberOfLines : NSInteger = 1 {
     didSet {
       updateInitialHeightAndResize()
