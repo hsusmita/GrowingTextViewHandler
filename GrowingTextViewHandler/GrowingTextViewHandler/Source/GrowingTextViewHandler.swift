@@ -15,17 +15,22 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
   public var maximumNumberOfLines = 10
   public var minimumNumberOfLines : NSInteger = 1 {
     didSet {
-      initialHeight = estimatedInitialHeight()
-      resizeTextView(animated: false)
+      updateInitialHeightAndResize()
     }
   }
   private var initialHeight: CGFloat! = 0.0;
   private var heightConstraint: NSLayoutConstraint!
   
-  init(textView:UITextView,heightConstraint:NSLayoutConstraint) {
+  public init(textView:UITextView,heightConstraint:NSLayoutConstraint) {
     super.init()
     self.growingTextView = textView
     self.heightConstraint = heightConstraint
+    updateInitialHeightAndResize()
+  }
+  
+  private func updateInitialHeightAndResize() {
+    initialHeight = estimatedInitialHeight()
+    resizeTextView(animated: false)
   }
 
   private func estimatedInitialHeight() -> (CGFloat) {
