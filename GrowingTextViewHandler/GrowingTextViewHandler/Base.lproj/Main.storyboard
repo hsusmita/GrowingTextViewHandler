@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="yuyyu" translatesAutoresizingMaskIntoConstraints="NO" id="q2N-J0-Gt2">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2N-J0-Gt2">
                                 <rect key="frame" x="100" y="131" width="400" height="30"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3a3-GU-7qL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="rI6-YI-qWf"/>
@@ -31,12 +31,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="q2N-J0-Gt2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="111" id="093-rG-cLX"/>
                             <constraint firstItem="q2N-J0-Gt2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="100" id="3G5-un-awm"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="q2N-J0-Gt2" secondAttribute="bottom" constant="439" id="8kE-3h-jvN"/>
+                            <constraint firstAttribute="centerY" secondItem="q2N-J0-Gt2" secondAttribute="centerY" constant="154" id="d2s-Ko-e3j"/>
                             <constraint firstAttribute="trailing" secondItem="q2N-J0-Gt2" secondAttribute="trailing" constant="100" id="vtf-8N-2AS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="093-rG-cLX"/>
+                                <exclude reference="8kE-3h-jvN"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="heightConstraint" destination="3a3-GU-7qL" id="tj1-eg-xi3"/>
                         <outlet property="textView" destination="q2N-J0-Gt2" id="aDg-Gw-uVg"/>
                     </connections>
                 </viewController>

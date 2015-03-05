@@ -11,23 +11,27 @@ import UIKit
 class ViewController: UIViewController,UITextViewDelegate {
 
   @IBOutlet weak var textView: UITextView!
+  @IBOutlet weak var heightConstraint: NSLayoutConstraint!
   var handler:GrowingTextViewHandler?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    handler = GrowingTextViewHandler(textView: self.textView, superView: self.view, growthDirection: TextGrowthDirection.Both)
+    handler = GrowingTextViewHandler(textView: self.textView, heightConstraint: self.heightConstraint)
+    handler?.minimumNumberOfLines = 2
+    handler?.maximumNumberOfLines = 6
   }
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
   }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
 
   func textViewDidChange(textView: UITextView) {
-    self.handler?.resize()
+    self.handler?.resizeTextView(animated:true)
   }
 }
 
