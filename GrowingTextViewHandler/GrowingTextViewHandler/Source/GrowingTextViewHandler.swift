@@ -34,16 +34,14 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
   }
 
   private func estimatedInitialHeight() -> (CGFloat) {
-    var font = growingTextView.font
-    var estimatedHeight = font.lineHeight * CGFloat(self.minimumNumberOfLines)
-    var caretHeight = self.growingTextView.caretRectForPosition(self.growingTextView.selectedTextRange?.end).height
-    var totalHeight = caretHeight * CGFloat(self.minimumNumberOfLines) + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
+    let caretHeight = self.growingTextView.caretRectForPosition((self.growingTextView.selectedTextRange?.end)!).height
+    let totalHeight = caretHeight * CGFloat(self.minimumNumberOfLines) + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
     return max(totalHeight,self.growingTextView.frame.size.height)
   }
   
   private func estimatedMinimumNumberOfLines() -> (NSInteger) {
-    var totalHeight: CGFloat = self.growingTextView.frame.size.height
-    return Int(ceil(totalHeight /  self.growingTextView.font.lineHeight))
+    let totalHeight: CGFloat = self.growingTextView.frame.size.height
+    return Int(ceil(totalHeight /  self.growingTextView.font!.lineHeight))
   }
   
   private func currentHeight() -> (CGFloat) {
@@ -51,9 +49,9 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
   }
   
   private func currentNumberOfLines() -> (NSInteger) {
-    var caretHeight = self.growingTextView.caretRectForPosition(self.growingTextView.selectedTextRange?.end).height
-    var totalHeight = self.growingTextView.contentSize.height + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
-    var numberOfLines = Int(totalHeight/caretHeight) - 1;
+    let caretHeight = self.growingTextView.caretRectForPosition((self.growingTextView.selectedTextRange?.end)!).height
+    let totalHeight = self.growingTextView.contentSize.height + self.growingTextView.textContainerInset.top + self.growingTextView.textContainerInset.bottom
+    let numberOfLines = Int(totalHeight/caretHeight) - 1
     return numberOfLines;
   }
   
@@ -75,14 +73,14 @@ public class GrowingTextViewHandler: NSObject, UIScrollViewDelegate {
     }
   }
   
-  public func resizeTextView(#animated:Bool) {
-    var textViewNumberOfLines = self.currentNumberOfLines();
+  public func resizeTextView(animated animated:Bool) {
+    let textViewNumberOfLines = self.currentNumberOfLines();
     if (textViewNumberOfLines <= self.minimumNumberOfLines) {
       self.updateVerticalAlignment(self.initialHeight,animated: animated)
       self.growingTextView.setContentOffset(CGPointZero, animated: true)
     }else if ((textViewNumberOfLines > self.minimumNumberOfLines) && (textViewNumberOfLines <= self.maximumNumberOfLines)) {
-      var currentHeight = self.currentHeight()
-      var verticalAlignmentConstant = (currentHeight > self.initialHeight) ? currentHeight : self.initialHeight
+      let currentHeight = self.currentHeight()
+      let verticalAlignmentConstant = (currentHeight > self.initialHeight) ? currentHeight : self.initialHeight
       self.updateVerticalAlignment(verticalAlignmentConstant, animated: animated)
       self.growingTextView.setContentOffset(CGPointZero, animated: true)
     }
