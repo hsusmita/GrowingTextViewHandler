@@ -12,7 +12,7 @@ class ViewController: UIViewController,UITextViewDelegate {
 
   @IBOutlet weak var textView: UITextView!
   @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-  var handler:GrowingTextViewHandler?
+  var handler: GrowingTextViewHandler?
   
   override func viewDidLoad() {
     super.viewDidLoad()
