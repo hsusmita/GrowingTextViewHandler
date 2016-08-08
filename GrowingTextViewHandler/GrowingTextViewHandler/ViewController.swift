@@ -19,19 +19,14 @@ class ViewController: UIViewController,UITextViewDelegate {
     handler = GrowingTextViewHandler(textView: self.textView, heightConstraint: self.heightConstraint)
     handler?.minimumNumberOfLines = 2
     handler?.maximumNumberOfLines = 6
+	handler?.setText("", animated: false)
   }
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
 
   func textViewDidChange(textView: UITextView) {
     self.handler?.resizeTextView(animated:true)
   }
 }
-
