@@ -19,23 +19,23 @@ class FormViewController: UIViewController {
 }
 
 extension FormViewController: UITableViewDataSource {
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
 
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("FormTableViewCellIdentifier") as? FormTableViewCell
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "FormTableViewCellIdentifier") as? FormTableViewCell
 		cell?.delegate = self
 		return cell!
 	}
 }
 
 extension FormViewController: FormTableViewCellDelegate {
-	func formTableViewCell(formTableViewCell: FormTableViewCell, shouldChangeHeight height: CGFloat) {
+	func formTableViewCell(_ formTableViewCell: FormTableViewCell, shouldChangeHeight height: CGFloat) {
 		tableView.beginUpdates()
 		tableView.endUpdates()
 	}

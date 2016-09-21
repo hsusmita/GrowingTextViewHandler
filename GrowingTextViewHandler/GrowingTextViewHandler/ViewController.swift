@@ -26,7 +26,7 @@ class ViewController: UIViewController,UITextViewDelegate {
     super.viewDidLayoutSubviews()
   }
 
-  func textViewDidChange(textView: UITextView) {
-    self.handler?.resizeTextView(animated:true)
+  func textViewDidChange(_ textView: UITextView) {
+    self.handler?.resizeTextView(true)
   }
 }

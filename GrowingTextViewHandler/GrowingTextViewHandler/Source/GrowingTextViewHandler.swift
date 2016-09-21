@@ -8,38 +8,38 @@
 
 import UIKit
 
-public class GrowingTextViewHandler: NSObject {
-	public var growingTextView : UITextView!
-	public var heightChangeAnimationDuration = 0.5
-	public var maximumNumberOfLines = Int.max {
+open class GrowingTextViewHandler: NSObject {
+	open var growingTextView : UITextView!
+	open var heightChangeAnimationDuration = 0.5
+	open var maximumNumberOfLines = Int.max {
 		didSet {
 			updateInitialHeightAndResize()
 		}
 	}
-	public var minimumNumberOfLines = 1 {
+	open var minimumNumberOfLines = 1 {
 		didSet {
 			updateInitialHeightAndResize()
 		}
 	}
 
-	private var textViewHeightConstraint: NSLayoutConstraint?
+	fileprivate var textViewHeightConstraint: NSLayoutConstraint?
 
 	/**
 		The minumum height of the textView
 	*/
-	private var initialHeight: CGFloat = 0.0
+	fileprivate var initialHeight: CGFloat = 0.0
 
 	/**
 		The maximum height of the textView upto which it should grow and start scrolling
 	*/
-	private var maximumHeight: CGFloat = 0.0
+	fileprivate var maximumHeight: CGFloat = 0.0
 
 	/**
 		This denotes the line height of single line of characters. This value depends on the font size.
 	*/
-	private var caretHeight: CGFloat {
+	fileprivate var caretHeight: CGFloat {
 		if let selectedTextRange = growingTextView.selectedTextRange {
-			return growingTextView.caretRectForPosition(selectedTextRange.end).size.height
+			return growingTextView.caretRect(for: selectedTextRange.end).size.height
 		} else {
 			return 0.0
 		}
@@ -47,21 +47,21 @@ public class GrowingTextViewHandler: NSObject {
 	/**
 		This gives the total height of the textView based on the text present in it
 	*/
-	private var currentHeight: CGFloat {
+	fileprivate var currentHeight: CGFloat {
 		guard let textViewFont = growingTextView.font else {
 			return 0.0
 		}
 		let width = growingTextView.bounds.size.width - 2.0 * growingTextView.textContainer.lineFragmentPadding
-		let boundingRect = growingTextView.text.boundingRectWithSize(CGSizeMake(width, CGFloat.max),
-		options: [.UsesLineFragmentOrigin, .UsesFontLeading], attributes: [NSFontAttributeName: textViewFont], context: nil)
-		let heightByBoundingRect = CGRectGetHeight(boundingRect) + textViewFont.lineHeight
+		let boundingRect = growingTextView.text.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
+		options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSFontAttributeName: textViewFont], context: nil)
+		let heightByBoundingRect = boundingRect.height + textViewFont.lineHeight
 		return max(heightByBoundingRect, growingTextView.contentSize.height)
 	}
 
 	/**
 		This gives the number of lines based on the text present in it
 	*/
-	private var currentNumberOfLines: Int {
+	fileprivate var currentNumberOfLines: Int {
 		let totalHeight = currentHeight + growingTextView.textContainerInset.top + growingTextView.textContainerInset.bottom
 		return Int(totalHeight/caretHeight) - 1
 	}
@@ -88,7 +88,7 @@ public class GrowingTextViewHandler: NSObject {
 		- parameters:
 			- animated: If set as true, the height change will be animated
 	*/
-	public func resizeTextView(animated animated: Bool) {
+	open func resizeTextView(_ animated: Bool) {
 		let textViewNumberOfLines = currentNumberOfLines
 		var verticalAlignmentConstant: CGFloat = 0.0
 		if textViewNumberOfLines <= minimumNumberOfLines {
@@ -98,7 +98,7 @@ public class GrowingTextViewHandler: NSObject {
 		} else if textViewNumberOfLines > maximumNumberOfLines {
 			verticalAlignmentConstant = maximumHeight
 		}
-		if let heightConstraint = textViewHeightConstraint where heightConstraint.constant != verticalAlignmentConstant {
+		if let heightConstraint = textViewHeightConstraint , heightConstraint.constant != verticalAlignmentConstant {
 			updateVerticalAlignmentWithHeight(verticalAlignmentConstant, animated: animated)
 		}
 		if textViewNumberOfLines <= maximumNumberOfLines {
@@ -113,12 +113,12 @@ public class GrowingTextViewHandler: NSObject {
 			- animated: If set as true, the height change will be animated
 	*/
 
-	public func setText(text: String, animated: Bool) {
+	open func setText(_ text: String, animated: Bool) {
 		self.growingTextView.text = text
 		if text.characters.isEmpty {
 			updateVerticalAlignmentWithHeight(self.initialHeight, animated: animated)
 		} else {
-			resizeTextView(animated: animated)
+			resizeTextView(animated)
 		}
 	}
 
@@ -128,10 +128,10 @@ public class GrowingTextViewHandler: NSObject {
 		This method initialzes the variables intialHeight and maximum height and performs initial resize
 	*/
 
-	private func updateInitialHeightAndResize() {
+	fileprivate func updateInitialHeightAndResize() {
 		initialHeight = estimatedInitialHeight()
 		maximumHeight = estimatedMaximumHeight()
-		resizeTextView(animated: false)
+		resizeTextView(false)
 	}
 	/**
 		This method gives the estimated value for the initial height of the textView.
@@ -141,10 +141,10 @@ public class GrowingTextViewHandler: NSObject {
 		and returns the maximum of two.
 	*/
 
-	private func estimatedInitialHeight() -> CGFloat {
+	fileprivate func estimatedInitialHeight() -> CGFloat {
 		let totalHeight = caretHeight * CGFloat(minimumNumberOfLines) + growingTextView.textContainerInset.top
 		+ growingTextView.textContainerInset.bottom
-		return fmax(totalHeight, CGRectGetHeight(growingTextView.frame))
+		return fmax(totalHeight, growingTextView.frame.height)
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class GrowingTextViewHandler: NSObject {
 		maximumNumberOfLines and caretHeight are the factors which determine the maximum height of the textView
 	*/
 
-	private func estimatedMaximumHeight() -> CGFloat {
+	fileprivate func estimatedMaximumHeight() -> CGFloat {
 		let totalHeight = caretHeight * CGFloat(maximumNumberOfLines) + growingTextView.textContainerInset.top
 		+ growingTextView.textContainerInset.bottom
 		return totalHeight
@@ -167,13 +167,13 @@ public class GrowingTextViewHandler: NSObject {
 			- animated: If set as true, the height change will be animated
 	*/
 
-	private func updateVerticalAlignmentWithHeight(height: CGFloat, animated: Bool) {
+	fileprivate func updateVerticalAlignmentWithHeight(_ height: CGFloat, animated: Bool) {
 		guard let heightConstraint = textViewHeightConstraint else {
 			return
 		}
 		heightConstraint.constant = height
 		if (animated == true) {
-			UIView.animateWithDuration(heightChangeAnimationDuration, animations: {
+			UIView.animate(withDuration: heightChangeAnimationDuration, animations: {
 				self.growingTextView.superview?.layoutIfNeeded()
 				}, completion: nil)
 		} else {
