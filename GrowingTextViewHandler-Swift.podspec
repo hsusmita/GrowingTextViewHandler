@@ -1,7 +1,7 @@
 Pod:: Spec.new do |spec|
   spec.platform     = 'ios', '8.0'
   spec.name         = 'GrowingTextViewHandler-Swift'
-  spec.version      = '1.0.3'
+  spec.version      = '1.1'
   spec.summary      = 'An NSObject subclass to handle resizing of UITextView as the user types in.'
   spec.author = {
     'Susmita Horrow' => 'susmita.horrow@gmail.com'
@@ -10,7 +10,7 @@ Pod:: Spec.new do |spec|
   spec.homepage         = 'https://github.com/hsusmita/GrowingTextViewHandler'
   spec.source = {
     :git => 'https://github.com/hsusmita/GrowingTextViewHandler.git',
-    :tag => '1.0.3'
+    :tag => '1.1'
   }
   spec.ios.deployment_target = '8.0'
   spec.source_files = 'GrowingTextViewHandler/GrowingTextViewHandler/Source/*'
