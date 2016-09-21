@@ -10,7 +10,7 @@ These are the public properties which can be set from the client code.
 
 Add following lines in your pod file  
 
-pod 'GrowingTextViewHandler-Swift', '~> 1.0.3'
+pod 'GrowingTextViewHandler-Swift', '~> 1'
 
 #Usage
 
