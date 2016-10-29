@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GrowingTextViewHandler
 
 protocol FormTableViewCellDelegate {
 	func formTableViewCell(_ formTableViewCell: FormTableViewCell, shouldChangeHeight height: CGFloat)

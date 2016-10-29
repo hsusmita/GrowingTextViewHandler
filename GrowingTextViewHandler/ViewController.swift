@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GrowingTextViewHandler
 
 class ViewController: UIViewController,UITextViewDelegate {
 
