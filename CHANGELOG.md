@@ -1,3 +1,7 @@
+version 1.1:
+Support for swift 3
+Carthage support
+
 version 1.0.3:
 Support for swift 2.0
 Detailed documentation
