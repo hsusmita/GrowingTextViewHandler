@@ -22,22 +22,22 @@ open class GrowingTextViewHandler: NSObject {
 		}
 	}
 
-	fileprivate var textViewHeightConstraint: NSLayoutConstraint?
+	private var textViewHeightConstraint: NSLayoutConstraint?
 
 	/**
 		The minumum height of the textView
 	*/
-	fileprivate var initialHeight: CGFloat = 0.0
+	private var initialHeight: CGFloat = 0.0
 
 	/**
 		The maximum height of the textView upto which it should grow and start scrolling
 	*/
-	fileprivate var maximumHeight: CGFloat = 0.0
+	private var maximumHeight: CGFloat = 0.0
 
 	/**
 		This denotes the line height of single line of characters. This value depends on the font size.
 	*/
-	fileprivate var caretHeight: CGFloat {
+	private var caretHeight: CGFloat {
 		if let selectedTextRange = growingTextView.selectedTextRange {
 			return growingTextView.caretRect(for: selectedTextRange.end).size.height
 		} else {
@@ -47,7 +47,7 @@ open class GrowingTextViewHandler: NSObject {
 	/**
 		This gives the total height of the textView based on the text present in it
 	*/
-	fileprivate var currentHeight: CGFloat {
+	private var currentHeight: CGFloat {
 		guard let textViewFont = growingTextView.font else {
 			return 0.0
 		}
@@ -61,7 +61,7 @@ open class GrowingTextViewHandler: NSObject {
 	/**
 		This gives the number of lines based on the text present in it
 	*/
-	fileprivate var currentNumberOfLines: Int {
+	private var currentNumberOfLines: Int {
 		let totalHeight = currentHeight + growingTextView.textContainerInset.top + growingTextView.textContainerInset.bottom
 		return Int(totalHeight/caretHeight) - 1
 	}
@@ -128,7 +128,7 @@ open class GrowingTextViewHandler: NSObject {
 		This method initialzes the variables intialHeight and maximum height and performs initial resize
 	*/
 
-	fileprivate func updateInitialHeightAndResize() {
+	private func updateInitialHeightAndResize() {
 		initialHeight = estimatedInitialHeight()
 		maximumHeight = estimatedMaximumHeight()
 		resizeTextView(false)
@@ -141,7 +141,7 @@ open class GrowingTextViewHandler: NSObject {
 		and returns the maximum of two.
 	*/
 
-	fileprivate func estimatedInitialHeight() -> CGFloat {
+	private func estimatedInitialHeight() -> CGFloat {
 		let totalHeight = caretHeight * CGFloat(minimumNumberOfLines) + growingTextView.textContainerInset.top
 		+ growingTextView.textContainerInset.bottom
 		return fmax(totalHeight, growingTextView.frame.height)
@@ -153,7 +153,7 @@ open class GrowingTextViewHandler: NSObject {
 		maximumNumberOfLines and caretHeight are the factors which determine the maximum height of the textView
 	*/
 
-	fileprivate func estimatedMaximumHeight() -> CGFloat {
+	private func estimatedMaximumHeight() -> CGFloat {
 		let totalHeight = caretHeight * CGFloat(maximumNumberOfLines) + growingTextView.textContainerInset.top
 		+ growingTextView.textContainerInset.bottom
 		return totalHeight
@@ -167,7 +167,7 @@ open class GrowingTextViewHandler: NSObject {
 			- animated: If set as true, the height change will be animated
 	*/
 
-	fileprivate func updateVerticalAlignmentWithHeight(_ height: CGFloat, animated: Bool) {
+	private func updateVerticalAlignmentWithHeight(_ height: CGFloat, animated: Bool) {
 		guard let heightConstraint = textViewHeightConstraint else {
 			return
 		}
