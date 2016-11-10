@@ -13,7 +13,7 @@ Pod:: Spec.new do |spec|
     :tag => '1.1'
   }
   spec.ios.deployment_target = '8.0'
-  spec.source_files = 'GrowingTextViewHandler/GrowingTextViewHandler/Source/*'
+  spec.source_files = 'GrowingTextViewHandler/Source/*'
   spec.requires_arc = true
 end
 
