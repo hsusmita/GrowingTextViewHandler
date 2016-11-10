@@ -23,7 +23,7 @@ open class GrowingTextViewHandler: NSObject {
 	}
 
 	private var textViewHeightConstraint: NSLayoutConstraint?
-
+	
 	/**
 		The minumum height of the textView
 	*/
@@ -79,6 +79,7 @@ open class GrowingTextViewHandler: NSObject {
 		super.init()
 		growingTextView = textView
 		textViewHeightConstraint = heightConstraint
+		initialHeight = heightConstraint.constant
 		updateInitialHeightAndResize()
 	}
 	/**
@@ -144,7 +145,7 @@ open class GrowingTextViewHandler: NSObject {
 	private func estimatedInitialHeight() -> CGFloat {
 		let totalHeight = caretHeight * CGFloat(minimumNumberOfLines) + growingTextView.textContainerInset.top
 		+ growingTextView.textContainerInset.bottom
-		return fmax(totalHeight, growingTextView.frame.height)
+		return fmax(totalHeight, initialHeight)
 	}
 
 	/**
