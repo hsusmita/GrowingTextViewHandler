@@ -52,8 +52,10 @@ open class GrowingTextViewHandler: NSObject {
 			return 0.0
 		}
 		let width = growingTextView.bounds.size.width - 2.0 * growingTextView.textContainer.lineFragmentPadding
-		let boundingRect = growingTextView.text.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
-		options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSFontAttributeName: textViewFont], context: nil)
+		let boundingRect = growingTextView.text.boundingRect(
+			with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude),
+			options: [.usesLineFragmentOrigin, .usesFontLeading],
+			attributes: [NSAttributedString.Key.font: textViewFont], context: nil)
 		let heightByBoundingRect = boundingRect.height + textViewFont.lineHeight
 		return max(heightByBoundingRect, growingTextView.contentSize.height)
 	}
@@ -116,7 +118,7 @@ open class GrowingTextViewHandler: NSObject {
 
 	open func setText(_ text: String, animated: Bool) {
 		self.growingTextView.text = text
-		if text.characters.isEmpty {
+		if text.isEmpty {
 			updateVerticalAlignmentWithHeight(self.initialHeight, animated: animated)
 		} else {
 			resizeTextView(animated)
