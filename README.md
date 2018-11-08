@@ -8,9 +8,9 @@ These are the public properties which can be set from the client code.
 
 #Installation
 
-Add following lines in your pod file for swift 3
+Add following lines in your pod file for Swift 4
 ```
-pod 'GrowingTextViewHandler-Swift', '1.1'
+pod 'GrowingTextViewHandler-Swift', '1.2'
 ```
 For older versions, use
 

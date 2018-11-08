@@ -1,3 +1,6 @@
+version 1.2:
+Support for swift 4
+
 version 1.1:
 Support for swift 3
 Carthage support
